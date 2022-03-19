@@ -13,18 +13,14 @@
     ],
     // symbols that are auto closed when typing
     "autoClosingPairs": [
-        ["{", "}"],
-        ["[", "]"],
-        ["(", ")"],
-        ["\"", "\""],
-        ["'", "'"]
+        {"open": "{", "close": "}", "notIn": ["comment"]},
+        {"open": "[", "close": "]", "notIn": ["comment"]},
+        {"open": "(", "close": ")", "notIn": ["comment"]}
     ],
     // symbols that can be used to surround a selection
     "surroundingPairs": [
         ["{", "}"],
         ["[", "]"],
-        ["(", ")"],
-        ["\"", "\""],
-        ["'", "'"]
+        ["(", ")"]
     ]
 }

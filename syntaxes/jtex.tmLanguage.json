@@ -63,7 +63,7 @@
 		"commands": {
 			"patterns": [
 				{
-					"begin": "--js{",
+					"begin": "--js\\s*{",
 					"end": "}",
 					"beginCaptures": {
 						"0": {
@@ -76,7 +76,7 @@
 					"patterns": [{"include": "source.js"}]
 				},
 				{
-					"begin": "--(m|math){",
+					"begin": "--(m|math)\\s*{",
 					"end": "}",
 					"beginCaptures": {
 						"0": {"name": "keyword.control.open"}
@@ -84,7 +84,7 @@
 					"endCaptures": {
 						"0": {"name": "keyword.control.close"}
 					},
-					"patterns": [{"include": "#commands"},{"include": "#math-wrapped"},{"include": "text.tex"}, {"include": "#curly-bracket-pair"}]
+					"patterns": [{"include": "#comments"},{"include": "#commands"},{"include": "text.tex"},{"include": "#curly-bracket-pair"},{"include": "#math-wrapped"}]
 				},
 				{
 					"name": "keyword.control.jtex",
@@ -97,7 +97,7 @@
 				},
 				{
 					"name": "keyword.control.jtex",
-					"match": "(--)(([a-zA-Z]+)|[^\\s])"
+					"match": "--(([a-zA-Z]+)|[^\\s])"
 				},
 				{
 					"begin": "--\\s",
@@ -108,16 +108,19 @@
 					"endCaptures": {
 						"0": {"name": "keyword.control.close"}
 					},
-					"patterns": [{"include": "#commands"},{"include": "#math"}]
+					"patterns": [{"include": "#comments"},{"include": "#commands"},{"include": "#math"}]
 				}
 			]
 		},
 		"math": {
+			"name": "constant.numeric",
 			"patterns": [{
 				"include": "#commands"
 			},{
 				"begin": "\\(",
 				"end": "\\)",
+				"beginCaptures": {"0": {"name": "entity.other.inherited-class"}},
+				"endCaptures": {"0": {"name": "entity.other.inherited-class"}},
 				"patterns":[{"include": "#math-wrapped"}]
 			},{
 				"name": "keyword",
@@ -125,6 +128,9 @@
 			},{
 				"name": "entity.name.function",
 				"match": "[a-zA-Z]([a-zA-Z0-9]|_)*"
+			},{
+				"name": "entity.other.attribute-name",
+				"match": "."
 			}]
 		},
 		"math-wrapped": {
