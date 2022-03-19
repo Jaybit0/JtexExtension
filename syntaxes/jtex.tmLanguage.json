@@ -106,7 +106,7 @@
 		"math": {
 			"patterns": [{
 				"name": "keyword",
-				"match": "(/|//|\\^|\\*|\\+|\\-|:=|=)"
+				"match": "(/|//|\\^|\\*|\\+|\\-|:=|=|=>|<=>|_|>|<|>=|<=)"
 			},{
 				"name": "entity.name.function",
 				"match": "[a-zA-Z]([a-zA-Z0-9]|_)*"
