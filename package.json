@@ -1,0 +1,25 @@
+{
+    "name": "jtex",
+    "displayName": "jtex",
+    "description": "",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.65.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [{
+            "id": "jtex",
+            "aliases": ["jtex", "jtex"],
+            "extensions": [".jtex"],
+            "configuration": "./language-configuration.json"
+        }],
+        "grammars": [{
+            "language": "jtex",
+            "scopeName": "source.jtex",
+            "path": "./syntaxes/jtex.tmLanguage.json"
+        }]
+    }
+}

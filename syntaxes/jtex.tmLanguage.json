@@ -1,0 +1,117 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "jtex",
+	"patterns": [
+		{
+			"include": "#comments"
+		},
+		{
+			"include": "#use-expr"
+		},
+		{
+			"include": "#keywords"
+		},
+		{
+			"include": "#commands"
+		},
+		{
+			"include": "text.tex"
+		}
+	],
+	"repository": {
+		"comments": {
+			"patterns":[
+				{
+					"name": "comment.single.jtex",
+					"match": "%.*$\\n?",
+					"captures": {
+						"1": {
+							"name": "punctuation.definition.comment.jtex"
+						}
+					}
+				},
+				{
+					"name": "comment.block.jtex",
+					"begin": "/\\*(?!/)",
+					"captures": {
+						"0": {
+							"name": "punctuation.definition.comment.jtex"
+						}
+					},
+					"end": "\\*/"
+				}
+			]
+		},
+		"use-expr": {
+			"begin": "--use",
+			"end": "(\\n|(,\\s*,)|[^([a-zA-Z0-9]|,|\\s)])",
+			"beginCaptures": {
+				"0": {"name": "keyword.use"}
+			},
+			"patterns": [{
+				"name": "keyword.default",
+				"match": "default"
+			},
+			{
+				"name": "entity.name.function.jtex",
+				"match": "[a-zA-Z0-9]+(,[a-zA-Z0-9]+)*"
+			}]
+		},
+		"keywords": {
+			"patterns": []
+		},
+		"commands": {
+			"patterns": [
+				{
+					"begin": "--js{",
+					"end": "}",
+					"beginCaptures": {
+						"0": {
+							"name": "keyword.control.open"
+						}
+					},
+					"endCaptures": {
+						"0": {"name": "keyword.control.close"}
+					},
+					"patterns": [{"include": "source.js"}]
+				},
+				{
+					"begin": "--(m|math){",
+					"end": "}",
+					"beginCaptures": {
+						"0": {"name": "keyword.control.open"}
+					},
+					"endCaptures": {
+						"0": {"name": "keyword.control.close"}
+					},
+					"patterns": [{"include": "#commands"},{"include": "#math"}]
+				},
+				{
+					"name": "keyword.control.jtex",
+					"match": "--(([a-zA-Z]+)|[^\\s])"
+				},
+				{
+					"begin": "--\\s",
+					"end": ";",
+					"beginCaptures": {
+						"0": {"name": "keyword.control.open"}
+					},
+					"endCaptures": {
+						"0": {"name": "keyword.control.close"}
+					},
+					"patterns": [{"include": "#commands"},{"include": "#math"}]
+				}
+			]
+		},
+		"math": {
+			"patterns": [{
+				"name": "keyword",
+				"match": "(/|//|\\^|\\*|\\+|\\-|:=|=)"
+			},{
+				"name": "entity.name.function",
+				"match": "[a-zA-Z]([a-zA-Z0-9]|_)*"
+			}]
+		}
+	},
+	"scopeName": "source.jtex"
+}
