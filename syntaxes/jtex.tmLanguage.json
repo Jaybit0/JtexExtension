@@ -105,6 +105,8 @@
 		},
 		"math": {
 			"patterns": [{
+				"include": "#commands"
+			},{
 				"begin": "\\(",
 				"end": "\\)",
 				"patterns":[{"include": "#math-wrapped"}]
