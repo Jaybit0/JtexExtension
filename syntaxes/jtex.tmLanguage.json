@@ -88,7 +88,16 @@
 				},
 				{
 					"name": "keyword.control.jtex",
-					"match": "--(([a-zA-Z]+)|[^\\s])"
+					"match": "--(\\(|\\{|\\[|\\)|\\}|\\])",
+					"captures": {
+						"1": {
+							"name": "comment"
+						}
+					}
+				},
+				{
+					"name": "keyword.control.jtex",
+					"match": "(--)(([a-zA-Z]+)|[^\\s])"
 				},
 				{
 					"begin": "--\\s",
