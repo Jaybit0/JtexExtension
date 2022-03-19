@@ -105,12 +105,27 @@
 		},
 		"math": {
 			"patterns": [{
+				"begin": "\\(",
+				"end": "\\)",
+				"patterns":[{"include": "#math-wrapped"}]
+			},{
 				"name": "keyword",
 				"match": "(/|//|\\^|\\*|\\+|\\-|:=|=|=>|<=>|_|>|<|>=|<=)"
 			},{
 				"name": "entity.name.function",
 				"match": "[a-zA-Z]([a-zA-Z0-9]|_)*"
 			}]
+		},
+		"math-wrapped": {
+			"patterns": [
+				{
+					"include": "#math"
+				},
+				{
+					"name": "keyword",
+					"match": ";"
+				}
+			]
 		}
 	},
 	"scopeName": "source.jtex"
