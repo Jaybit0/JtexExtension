@@ -84,7 +84,7 @@
 					"endCaptures": {
 						"0": {"name": "keyword.control.close"}
 					},
-					"patterns": [{"include": "#commands"},{"include": "#math"}]
+					"patterns": [{"include": "#commands"},{"include": "#math-wrapped"},{"include": "text.tex"}, {"include": "#curly-bracket-pair"}]
 				},
 				{
 					"name": "keyword.control.jtex",
@@ -126,6 +126,10 @@
 					"match": ";"
 				}
 			]
+		},
+		"curly-bracket-pair": {
+			"begin": "{",
+			"end": "}"
 		}
 	},
 	"scopeName": "source.jtex"
