@@ -6,9 +6,6 @@
 			"include": "#comments"
 		},
 		{
-			"include": "#use-expr"
-		},
-		{
 			"include": "#keywords"
 		},
 		{
@@ -42,26 +39,35 @@
 				}
 			]
 		},
-		"use-expr": {
-			"begin": "--use",
-			"end": "(\\n|(,\\s*,)|[^([a-zA-Z0-9]|,|\\s)])",
-			"beginCaptures": {
-				"0": {"name": "keyword.use"}
-			},
-			"patterns": [{
-				"name": "keyword.default",
-				"match": "default"
-			},
-			{
-				"name": "entity.name.function.jtex",
-				"match": "[a-zA-Z0-9]+(,[a-zA-Z0-9]+)*"
-			}]
-		},
 		"keywords": {
 			"patterns": []
 		},
 		"commands": {
 			"patterns": [
+				{
+					"begin": "--use",
+					"end": "(\\n|,\\s*,|[^([a-zA-Z0-9]|,|\\s|\\-)]|([a-zA-Z0-9]+)\\s+[a-zA-Z0-9]+)",
+					"beginCaptures": {
+						"0": {"name": "keyword.control.use"}
+					},
+					"endCaptures": {
+						"2": {
+							"name": "entity.name.function.jtex",
+							"patterns": [{
+								"name": "keyword.default",
+								"match": "default"
+							}]
+						}
+					},
+					"patterns": [{
+						"name": "keyword.default",
+						"match": "default"
+					},
+					{
+						"name": "entity.name.function.jtex",
+						"match": "[a-zA-Z][a-zA-Z0-9]*(,[a-zA-Z][a-zA-Z0-9]*)*"
+					}]
+				},
 				{
 					"begin": "--js\\s*{",
 					"end": "}",
