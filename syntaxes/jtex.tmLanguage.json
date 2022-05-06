@@ -69,7 +69,7 @@
 					}]
 				},
 				{
-					"begin": "--js\\s*{",
+					"begin": "--js",
 					"end": "}",
 					"beginCaptures": {
 						"0": {
@@ -79,10 +79,10 @@
 					"endCaptures": {
 						"0": {"name": "keyword.control.close"}
 					},
-					"patterns": [{"include": "source.js"}]
+					"patterns": [{"include": "#comments"},{"include": "#optional-params"},{"include": "#js-container"}]
 				},
 				{
-					"begin": "--(m|math)\\s*{",
+					"begin": "--(math|m)",
 					"end": "}",
 					"beginCaptures": {
 						"0": {"name": "keyword.control.open"}
@@ -90,7 +90,7 @@
 					"endCaptures": {
 						"0": {"name": "keyword.control.close"}
 					},
-					"patterns": [{"include": "#comments"},{"include": "#commands"},{"include": "text.tex"},{"include": "#curly-bracket-pair"},{"include": "#math-wrapped"}]
+					"patterns": [{"include": "#comments"},{"include":"#optional-params"},{"include": "#math-container"}]
 				},
 				{
 					"name": "keyword.control.jtex",
@@ -118,6 +118,20 @@
 				}
 			]
 		},
+		"js-container": {
+			"begin": "\\{",
+			"end": "(?=})",
+			"patterns": [
+				{"include": "source.js"}
+			]
+		},
+		"math-container": {
+			"begin": "\\{",
+			"end": "(?=})",
+			"patterns": [
+				{"include": "#comments"},{"include": "#commands"},{"include": "text.tex"},{"include": "#curly-bracket-pair"},{"include": "#math-wrapped"}
+			]
+		},
 		"math": {
 			"name": "constant.numeric",
 			"patterns": [{
@@ -133,7 +147,7 @@
 				"match": "(/|//|\\^|\\*|\\+|\\-|:=|=|=>|<=>|_|>|<|>=|<=)"
 			},{
 				"name": "entity.name.function",
-				"match": "[a-zA-Z]([a-zA-Z0-9]|_)*"
+				"match": "[a-zA-Z]([a-zA-Z0-9])*"
 			},{
 				"name": "entity.other.attribute-name",
 				"match": "."
@@ -150,9 +164,32 @@
 				}
 			]
 		},
+		"optional-params": {
+			"begin": "(\\.)[a-zA-Z]([a-zA-Z0-9])*",
+			"end": "(?=\\{)",
+			"beginCaptures": {
+				"0": {"name": "entity.name.function"}
+			},
+			"patterns": [
+				{
+					"include": "#tuple"
+				}
+			]
+		},
 		"curly-bracket-pair": {
 			"begin": "{",
 			"end": "}"
+		},
+		"tuple": {
+			"name": "entity.name.function",
+			"begin": "\\(",
+			"end": "\\)",
+			"patterns": [
+				{
+					"name": "entity.name.function",
+					"match": "[a-zA-Z]([a-zA-Z0-9])*"
+				}
+			]
 		}
 	},
 	"scopeName": "source.jtex"
