@@ -127,9 +127,30 @@
 		},
 		"math-container": {
 			"begin": "\\{",
-			"end": "(?=})",
+			"end": "(?=\\})",
+			"contentName": "meta.math-container.jtex",
 			"patterns": [
-				{"include": "#comments"},{"include": "#commands"},{"include": "text.tex"},{"include": "#curly-bracket-pair"},{"include": "#math-wrapped"}
+				{"include": "#balanced-pair"},
+				{"include": "#comments"},
+				{"include": "#commands"},
+				{"include": "text.tex"},
+				{"include": "#curly-bracket-pair"},
+				{"include": "#math-wrapped"},
+				{"include": "#math"}
+			]
+		},
+		"balanced-pair": {
+			"begin": "\\{",
+			"end": "\\}",
+			"contentName": "meta.brace.curly.jtex",
+			"patterns": [
+				{"include": "#balanced-pair"},
+				{"include": "#comments"},
+				{"include": "#commands"},
+				{"include": "text.tex"},
+				{"include": "#curly-bracket-pair"},
+				{"include": "#math-wrapped"},
+				{"include": "#math"}
 			]
 		},
 		"math": {
@@ -178,7 +199,8 @@
 		},
 		"curly-bracket-pair": {
 			"begin": "{",
-			"end": "}"
+			"end": "}",
+			"patterns": [{"include": "#comments"},{"include":"#optional-params"},{"include": "#math-container"}]
 		},
 		"tuple": {
 			"name": "entity.name.function",
