@@ -13,7 +13,7 @@ JTeX currently supports the following operating systems:
 
 ## Installation
 
-To install this extension, clone this repository and move its content into the `vscode/extensions` folder in your user directory. Then restart Visual Studio Code.
+To install this extension, clone this repository and move its content into the `.vscode/extensions` folder in your user directory. Then restart Visual Studio Code.
 
 ## Contributing
 
