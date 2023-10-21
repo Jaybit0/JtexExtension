@@ -1,13 +1,14 @@
 {
     "name": "jtex",
-    "displayName": "jtex",
+    "displayName": "JTeX",
     "description": "",
     "version": "0.0.1",
     "engines": {
         "vscode": "^1.65.0"
     },
     "categories": [
-        "Programming Languages"
+        "Programming Languages",
+        "Debuggers"
     ],
     "contributes": {
         "languages": [{
@@ -20,6 +21,13 @@
             "language": "jtex",
             "scopeName": "source.jtex",
             "path": "./syntaxes/jtex.tmLanguage.json"
-        }]
+        }],
+        "debuggers": [
+            {
+                "type": "jtex",
+                "label": "JTeX",
+                "program": "jtex dynamiccompile ${workspaceFolder}"
+            }
+        ]
     }
 }
